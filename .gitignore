@@ -2,3 +2,4 @@ drw.o
 dwm
 dwm.o
 util.o
+config.h
