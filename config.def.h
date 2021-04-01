@@ -16,9 +16,9 @@ static       int smartgaps          = 1;        /* 1 means no outer gap when the
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "Hack Regular Nerd Font Complete:size=12" };
-static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "0", "+5%",     NULL };
-static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "0", "-5%",     NULL };
-static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "toggle",  NULL };
+static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%",     NULL };
+static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%",     NULL };
+static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "@DEFAULT_SINK@", "toggle",  NULL };
 static const char dmenufont[]       = "Hack Regular Nerd Font Complete:size=12";
 static const char col_gray1[]       = "#1E1E1E";
 static const char col_gray2[]       = "#444444";
@@ -62,15 +62,15 @@ static const int resizehints = 1;    /* 1 means respect size hints in tiled resi
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ "[M]",      monocle },
 	{ "H[]",      deck },
-	{ "TTT",      bstack },
+	{ "[M]",      monocle },
+	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "|M|",      centeredmaster },
 	{ ">M>",      centeredfloatingmaster },
 	{ NULL,       NULL },
- 	{ "[@]",      spiral },
- 	{ "[\\]",     dwindle },
+ 	/* { "[\\]",     dwindle }, */
+	/* { "TTT",      bstack }, */
+ 	/* { "[@]",      spiral }, */
 };
 
 /* key definitions */
@@ -114,22 +114,18 @@ static Key keys[] = {
 	{ MODKEY,                       XK_n,      shiftview,      {.i = +1 } },
 	{ MODKEY,                       XK_p,      shiftview,      {.i = -1 } },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} }, // tile
-	{ MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} }, // float
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} }, // monocle
-    { MODKEY|ShiftMask,             XK_t,      setlayout,      {.v = &layouts[4]} }, // dwindle
+	{ MODKEY|ShiftMask,             XK_t,      setlayout,      {.v = &layouts[1]} }, // tile
+	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[2]} }, // float
+	{ MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[3]} }, // float
+	{ MODKEY,                       XK_c,      setlayout,      {.v = &layouts[4]} }, // monocle
+    { MODKEY|ShiftMask,             XK_c,      setlayout,      {.v = &layouts[5]} }, // dwindle
 	{ MODKEY,                       XK_g,      togglegaps,     {0} },
 	{ MODKEY|ShiftMask,             XK_g,      defaultgaps,    {0} },
 	{ 0,                            XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
 	{ 0,                            XF86XK_AudioMute, spawn, {.v = mutevol } },
 	{ 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } },
-	/* { MODKEY|ShiftMask,			    XK_t,      spawn,		   SHCMD("kitty -e ytop") }, */
-    /* { MODKEY|ShiftMask,             XK_y,      setlayout,      {.v = &layouts[3]} }, // spiral */
-	/* { MODKEY,                       XK_semicolon,      shiftview,      {.i = 1 } }, */
-	/* { MODKEY|ShiftMask,             XK_space,  togglefloating, {0} }, */
-	/* { MODKEY,                       XK_0,      view,           {.ui = ~0 } }, */
-	/* { MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } }, */
-	/* { MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } }, */
-	/* { MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } }, */
+	{ MODKEY|ControlMask,		XK_comma,  cyclelayout,    {.i = -1 } },
+	{ MODKEY|ControlMask,           XK_period, cyclelayout,    {.i = +1 } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -140,6 +136,14 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	/* { MODKEY|ShiftMask,			    XK_t,      spawn,		   SHCMD("kitty -e ytop") }, */
+    /* { MODKEY|ShiftMask,             XK_y,      setlayout,      {.v = &layouts[3]} }, // spiral */
+	/* { MODKEY,                       XK_semicolon,      shiftview,      {.i = 1 } }, */
+	/* { MODKEY|ShiftMask,             XK_space,  togglefloating, {0} }, */
+	/* { MODKEY,                       XK_0,      view,           {.ui = ~0 } }, */
+	/* { MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } }, */
+	/* { MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } }, */
+	/* { MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } }, */
 };
 
 /* # Pulse Audio controls */
