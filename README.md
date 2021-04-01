@@ -57,6 +57,7 @@ This is in the order that I patched everything:
 - [staticstatus](https://dwm.suckless.org/patches/staticstatus/)
 - [hide vacant tags](https://dwm.suckless.org/patches/hide_vacant_tags/)
 - [cycle layout](https://dwm.suckless.org/patches/cyclelayouts/)
+= [always center](https://dwm.suckless.org/patches/alwayscenter/)
 
 ## Media keys
 
