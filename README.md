@@ -56,3 +56,8 @@ This is in the order that I patched everything:
 - [systray](https://dwm.suckless.org/patches/systray/)
 - [staticstatus](https://dwm.suckless.org/patches/staticstatus/)
 
+## Media keys
+
+Here is a helpful [link](https://gist.github.com/palopezv/efd34059af6126ad970940bcc6a90f2e)
+
+**NOTE** (I had to change "0" to "@DEFAULT_SINK@")
