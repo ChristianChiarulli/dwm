@@ -1,5 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 
+
 /* appearance */
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -17,6 +18,7 @@ static const char *colors[][3]      = {
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
+
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
@@ -61,6 +63,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "kitty", NULL };
 
+#include "./patches/shiftview.c"
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
@@ -84,7 +87,9 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,			    XK_y,      spawn,		   SHCMD("flameshot full -p ~/Pictures/screenshots") },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	/* { MODKEY,                       XK_Tab,    view,           {0} }, */
+	{ MODKEY,                       XK_n,      shiftview,      {.i = +1 } },
+	{ MODKEY,                       XK_p,      shiftview,      {.i = -1 } },
+	/* { MODKEY,                       XK_semicolon,      shiftview,      {.i = 1 } }, */
 	/* { MODKEY,                       XK_space,  setlayout,      {0} }, */
 	/* { MODKEY|ShiftMask,             XK_space,  togglefloating, {0} }, */
 	/* { MODKEY,                       XK_0,      view,           {.ui = ~0 } }, */
