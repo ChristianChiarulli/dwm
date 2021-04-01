@@ -55,6 +55,8 @@ This is in the order that I patched everything:
 - [vanitygaps](https://dwm.suckless.org/patches/vanitygaps/)
 - [systray](https://dwm.suckless.org/patches/systray/)
 - [staticstatus](https://dwm.suckless.org/patches/staticstatus/)
+- [hide vacant tags](https://dwm.suckless.org/patches/hide_vacant_tags/)
+- [cycle layout](https://dwm.suckless.org/patches/cyclelayouts/)
 
 ## Media keys
 

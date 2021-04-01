@@ -3,3 +3,4 @@ dwm
 dwm.o
 util.o
 config.h
+todo/
