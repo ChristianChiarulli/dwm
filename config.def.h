@@ -39,7 +39,7 @@ static const char *colors[][3]      = {
 	[SchemeSel]  = { col_gray4, col_blue,  col_blue  },
 	[SchemeStatus]  = { col_gray4, col_gray1,  "#000000"  }, // Statusbar right {text,background,not used but cannot be empty}
 
-	[SchemeTagsSel]  = { col_gray3, col_blue,  "#000000"  }, // Tagbar left selected {text,background,not used but cannot be empty}
+	[SchemeTagsSel]  = { col_gray2, col_blue,  "#000000"  }, // Tagbar left selected {text,background,not used but cannot be empty}
     [SchemeTagsNorm]  = { col_gray4, col_gray1,  "#000000"  }, // Tagbar left unselected {text,background,not used but cannot be empty}
 
     [SchemeInfoSel]  = { col_gray3, col_bg_alt,  "#000000"  }, // infobar middle  selected {text,background,not used but cannot be empty}
@@ -124,6 +124,7 @@ static Key keys[] = {
 	{ MODKEY,			            XK_r,      spawn,		   SHCMD("kitty -e ranger") },
 	{ MODKEY,			            XK_y,      spawn,		   SHCMD("flameshot gui -p ~/Pictures/screenshots") },
 	{ MODKEY|ShiftMask,			    XK_y,      spawn,		   SHCMD("flameshot full -p ~/Pictures/screenshots") },
+	{ MODKEY,                       XK_semicolon,      spawn,  SHCMD("skippy-xd") },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY,                       XK_n,      shiftview,      {.i = +1 } },
@@ -153,7 +154,6 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	/* { MODKEY|ShiftMask,			    XK_t,      spawn,		   SHCMD("kitty -e ytop") }, */
     /* { MODKEY|ShiftMask,             XK_y,      setlayout,      {.v = &layouts[3]} }, // spiral */
-	/* { MODKEY,                       XK_semicolon,      shiftview,      {.i = 1 } }, */
 	/* { MODKEY|ShiftMask,             XK_space,  togglefloating, {0} }, */
 	/* { MODKEY,                       XK_0,      view,           {.ui = ~0 } }, */
 	/* { MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } }, */
