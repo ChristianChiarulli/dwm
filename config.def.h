@@ -107,7 +107,8 @@ static const char *termcmd[]  = { "kitty", NULL };
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_b,      togglebar,      {0} },
+	{ MODKEY,			            XK_b,      spawn,		   SHCMD("feh --bg-fill --randomize ~/Pictures/wallpapers/* &") },
+	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
 	{ MODKEY|ShiftMask,             XK_j,      rotatestack,    {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_k,      rotatestack,    {.i = -1 } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -119,7 +120,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_space,  spawn,          SHCMD("dmenu_run") },
-	{ MODKEY|ShiftMask,             XK_space,  setlayout,      {0} }, 
+	{ MODKEY|ShiftMask,             XK_space,      setlayout,      {0} }, 
 	{ MODKEY,			            XK_w,      spawn,		   SHCMD("$BROWSER") },
 	{ MODKEY,			            XK_r,      spawn,		   SHCMD("kitty -e ranger") },
 	{ MODKEY,			            XK_y,      spawn,		   SHCMD("flameshot gui -p ~/Pictures/screenshots") },
@@ -132,7 +133,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} }, // tile
 	{ MODKEY|ShiftMask,             XK_t,      setlayout,      {.v = &layouts[1]} }, // tile
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[2]} }, // float
-	{ MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[3]} }, // float
+	/* { MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[3]} }, // float */
+	{ MODKEY|ShiftMask,             XK_f,      togglefloating, {0} },
 	{ MODKEY,                       XK_c,      setlayout,      {.v = &layouts[4]} }, // monocle
     { MODKEY|ShiftMask,             XK_c,      setlayout,      {.v = &layouts[5]} }, // dwindle
 	{ MODKEY,                       XK_g,      togglegaps,     {0} },
@@ -140,7 +142,7 @@ static Key keys[] = {
 	{ 0,                            XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
 	{ 0,                            XF86XK_AudioMute, spawn, {.v = mutevol } },
 	{ 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } },
-	{ MODKEY|ControlMask,		XK_comma,  cyclelayout,    {.i = -1 } },
+	{ MODKEY|ControlMask,		    XK_comma,  cyclelayout,    {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_period, cyclelayout,    {.i = +1 } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
@@ -154,7 +156,6 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	/* { MODKEY|ShiftMask,			    XK_t,      spawn,		   SHCMD("kitty -e ytop") }, */
     /* { MODKEY|ShiftMask,             XK_y,      setlayout,      {.v = &layouts[3]} }, // spiral */
-	/* { MODKEY|ShiftMask,             XK_space,  togglefloating, {0} }, */
 	/* { MODKEY,                       XK_0,      view,           {.ui = ~0 } }, */
 	/* { MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } }, */
 	/* { MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } }, */
