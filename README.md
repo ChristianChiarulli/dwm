@@ -31,6 +31,7 @@ Here is a helpful [link](https://gist.github.com/palopezv/efd34059af6126ad970940
 
 - Add sticky patch
 - Add resize corner patch
+- Add swallow patch
 - move between monitors
 
 ## Probably not
