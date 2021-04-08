@@ -16,7 +16,6 @@ This is in the order that I patched everything:
 - [rotate stack](https://dwm.suckless.org/patches/rotatestack/)
 - [notify thing](https://dwm.suckless.org/patches/focusonnetactive/)
 - [warp](https://dwm.suckless.org/patches/warp/)
-- [no border](https://dwm.suckless.org/patches/noborder/)
 
 ## Exploding Windows
 
