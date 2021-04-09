@@ -100,7 +100,7 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *termcmd[]  = { "kitty", NULL };
+static const char *termcmd[]  = { "alacritty", NULL };
 
 #include <X11/XF86keysym.h>
 #include "./patches/shiftview.c"
@@ -122,7 +122,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_space,  spawn,          SHCMD("dmenu_run") },
 	{ MODKEY|ShiftMask,             XK_space,      setlayout,      {0} }, 
 	{ MODKEY,			            XK_w,      spawn,		   SHCMD("$BROWSER") },
-	{ MODKEY,			            XK_r,      spawn,		   SHCMD("kitty -e ranger") },
+	{ MODKEY,			            XK_r,      spawn,		   SHCMD("alacritty -e ranger") },
 	{ MODKEY,			            XK_y,      spawn,		   SHCMD("flameshot gui -p ~/Pictures/screenshots") },
 	{ MODKEY|ShiftMask,			    XK_y,      spawn,		   SHCMD("flameshot full -p ~/Pictures/screenshots") },
 	{ MODKEY,                       XK_semicolon,      spawn,  SHCMD("skippy-xd") },
