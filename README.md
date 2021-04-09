@@ -30,11 +30,16 @@ Here is a helpful [link](https://gist.github.com/palopezv/efd34059af6126ad970940
 
 ## TODO
 
+- statuscmd patch
 - Add sticky patch
+- scratchpad (maybe named scratchpad)
+- alternative tags
+- maybe steam
 - Add resize corner patch
 - Add swallow patch
-- move between monitors
 
 ## Probably not
 
+- pertag
+- awesome bar
 - Add alpha patch
