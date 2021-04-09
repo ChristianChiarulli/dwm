@@ -15,10 +15,10 @@ static const unsigned int gappov    = 23;       /* vert outer gap between window
 static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Hack Regular Nerd Font Complete:size=12", "JoyPixels:pixelsize=12:antialias=true:autohint=true" };
-static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%",     NULL };
-static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%",     NULL };
-static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "@DEFAULT_SINK@", "toggle",  NULL };
+static const char *fonts[]          = { "Source Code Pro Regular:size=13", "JoyPixels:pixelsize=14:antialias=true:autohint=true" };
+static const char *upvol[]          = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%",     NULL };
+static const char *downvol[]        = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%",     NULL };
+static const char *mutevol[]        = { "/usr/bin/pactl", "set-sink-mute",   "@DEFAULT_SINK@", "toggle",  NULL };
 static const char col_gray1[]       = "#232731";
 static const char col_gray2[]       = "#333333";
 static const char col_gray3[]       = "#bbbbbb";
@@ -100,7 +100,7 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *termcmd[]  = { "alacritty", NULL };
+static const char *termcmd[]  = { "st", NULL };
 
 #include <X11/XF86keysym.h>
 #include "./patches/shiftview.c"
@@ -122,9 +122,10 @@ static Key keys[] = {
 	{ MODKEY,                       XK_space,  spawn,          SHCMD("dmenu_run") },
 	{ MODKEY|ShiftMask,             XK_space,      setlayout,      {0} }, 
 	{ MODKEY,			            XK_w,      spawn,		   SHCMD("$BROWSER") },
-	{ MODKEY,			            XK_r,      spawn,		   SHCMD("alacritty -e ranger") },
+	{ MODKEY,			            XK_r,      spawn,		   SHCMD("$TERMINAL -e ranger") },
 	{ MODKEY,			            XK_y,      spawn,		   SHCMD("flameshot gui -p ~/Pictures/screenshots") },
 	{ MODKEY|ShiftMask,			    XK_y,      spawn,		   SHCMD("flameshot full -p ~/Pictures/screenshots") },
+	{ MODKEY|ShiftMask,			    XK_v,      spawn,		   SHCMD("mpv /dev/video0") },
 	{ MODKEY,                       XK_semicolon,      spawn,  SHCMD("skippy-xd") },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
@@ -144,6 +145,8 @@ static Key keys[] = {
 	{ 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } },
 	{ MODKEY|ControlMask,		    XK_comma,  cyclelayout,    {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_period, cyclelayout,    {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -153,13 +156,11 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
+	{ MODKEY,                       XK_F2,      spawn,  SHCMD("screenkey -s small --scr 1 -p fixed -g 600x100+2573+1330 --opacity .9 --font-color white") },
+	{ MODKEY,                       XK_F3,      spawn,  SHCMD("killall screenkey") },
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-	/* { MODKEY|ShiftMask,			    XK_t,      spawn,		   SHCMD("kitty -e ytop") }, */
-    /* { MODKEY|ShiftMask,             XK_y,      setlayout,      {.v = &layouts[3]} }, // spiral */
 	/* { MODKEY,                       XK_0,      view,           {.ui = ~0 } }, */
 	/* { MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } }, */
-	/* { MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } }, */
-	/* { MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } }, */
 };
 
 
