@@ -4,7 +4,7 @@
 /* appearance */
 static const unsigned int borderpx       = 3;        /* border pixel of windows */
 static const unsigned int snap           = 32;       /* snap pixel */
-static const unsigned int systraypinning = 2;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+static const unsigned int systraypinning = 1;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 8;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray             = 1;     /* 0 means no systray */
@@ -51,7 +51,7 @@ static const char *colors[][3] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* staticstatus */
-static const int statmonval = 0;
+static const int statmonval = 1;
 
 /* tagging */
 static const char *tags[] = { " 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 " };
@@ -91,6 +91,7 @@ static const Layout layouts[] = {
 
 /* key definitions */
 #define MODKEY Mod4Mask
+#define MODKEY_ALT Mod1Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -116,13 +117,16 @@ static Key keys[] = {
 	{ MODKEY,                       XK_k,           focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,           incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_d,           incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_h,           setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_l,           setmfact,       {.f = +0.05} },
+	{ MODKEY_ALT,                   XK_h,           setmfact,       {.f = -0.05} },
+	{ MODKEY_ALT,                   XK_l,           setmfact,       {.f = +0.05} },
+	{ MODKEY_ALT,                   XK_j,           setmfact,       {.f = -0.05} },
+	{ MODKEY_ALT,                   XK_k,           setmfact,       {.f = +0.05} },
 	{ MODKEY|ShiftMask,             XK_Return,      zoom,           {0} },
 	{ MODKEY,                       XK_q,           killclient,     {0} },
 	{ MODKEY,			                  XK_s,           spawn,		      SHCMD("restream -p") },
 	{ MODKEY,                       XK_space,       spawn,          SHCMD("dmenu_run") },
 	{ MODKEY|ShiftMask,             XK_space,       setlayout,      {0} }, 
+	{ MODKEY,			                  XK_e,           spawn,		      SHCMD("nautilus") },
 	{ MODKEY,			                  XK_w,           spawn,		      SHCMD("$BROWSER") },
 	{ MODKEY,			                  XK_r,           spawn,		      SHCMD("$TERMINAL -e ranger") },
 	{ MODKEY,			                  XK_y,           spawn,		      SHCMD("flameshot gui -p ~/Pictures/screenshots") },
@@ -131,8 +135,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_semicolon,   spawn,          SHCMD("skippy-xd") },
 	{ MODKEY,                       XK_comma,       focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period,      focusmon,       {.i = +1 } },
-	{ MODKEY,                       XK_n,           shiftview,      {.i = +1 } },
-	{ MODKEY,                       XK_p,           shiftview,      {.i = -1 } },
+	{ MODKEY,                       XK_l,           shiftview,      {.i = +1 } },
+	{ MODKEY,                       XK_h,           shiftview,      {.i = -1 } },
 	{ MODKEY,                       XK_t,           setlayout,      {.v = &layouts[0]} }, // tile
 	{ MODKEY|ShiftMask,             XK_t,           setlayout,      {.v = &layouts[1]} }, // tile
 	{ MODKEY,                       XK_f,           setlayout,      {.v = &layouts[2]} }, // float
@@ -146,10 +150,6 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,           XK_period,      cyclelayout,    {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,       tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period,      tagmon,         {.i = +1 } },
-  { MODKEY,                       XK_minus,       focusmon,       {.i = -1 } },
-  { MODKEY,                       XK_equal,       focusmon,       {.i = +1 } },
-  { MODKEY|ShiftMask,             XK_minus,       tagmon,         {.i = -1 } },
-  { MODKEY|ShiftMask,             XK_equal,       tagmon,         {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_q,           quit,           {0} },
 	{ MODKEY,                       XK_F2,          spawn,          SHCMD("screenkey -s small --scr 2 -p fixed -g 400x100+2150+1330 --opacity .6 --font-color white") },
 	{ MODKEY,                       XK_F3,          spawn,          SHCMD("killall screenkey") },
@@ -165,8 +165,16 @@ static Key keys[] = {
 	/* { MODKEY,                       XK_0,      view,           {.ui = ~0 } }, */
 	/* { MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } }, */
 	{ 0,                            XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
-	{ 0,                            XF86XK_AudioMute, spawn, {.v = mutevol } },
 	{ 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } },
+	{ 0,                            XF86XK_AudioMute, spawn, {.v = mutevol } },
+	{ MODKEY,                       XK_minus, spawn, {.v = downvol } },
+	{ MODKEY,                       XK_equal, spawn, {.v = upvol   } },
+	{ MODKEY,                       XK_0, spawn, {.v = mutevol } },
+  /* { MODKEY,                       XK_minus,       focusmon,       {.i = -1 } }, */
+  /* { MODKEY,                       XK_equal,       focusmon,       {.i = +1 } }, */
+  /* { MODKEY,                       XK_0,       focusmon,       {.i = +1 } }, */
+  /* { MODKEY|ShiftMask,             XK_minus,       tagmon,         {.i = -1 } }, */
+  /* { MODKEY|ShiftMask,             XK_equal,       tagmon,         {.i = +1 } }, */
 };
 
 
