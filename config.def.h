@@ -4,7 +4,7 @@
 /* appearance */
 static const unsigned int borderpx       = 3;        /* border pixel of windows */
 static const unsigned int snap           = 32;       /* snap pixel */
-static const unsigned int systraypinning = 1;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+static const unsigned int systraypinning = 2;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 8;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray             = 1;     /* 0 means no systray */
@@ -19,12 +19,12 @@ static const char *fonts[]               = { "Source Code Pro Regular:size=13", 
 static const char *upvol[]               = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%",     NULL };
 static const char *downvol[]             = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%",     NULL };
 static const char *mutevol[]             = { "/usr/bin/pactl", "set-sink-mute",   "@DEFAULT_SINK@", "toggle",  NULL };
-static const char col_gray1[]            = "#1e1e1e";
-static const char col_gray2[]            = "#333333";
-static const char col_gray3[]            = "#bbbbbb";
-static const char col_gray4[]            = "#fefefe";
-static const char col_cyan[]             = "#005577";
-static const char col_purple[]           = "#5a5aa4";
+static const char col_gray1[]            = "#1f2227";
+static const char col_gray2[]            = "#abb2bf";
+static const char col_gray3[]            = "#abb2bf";
+static const char col_gray4[]            = "#abb2bf";
+static const char col_cyan[]             = "#88c0d0";
+static const char col_purple[]           = "#B48EAD";
 static const char col_red[]              = "#d54646";
 static const char col_green[]            = "#23d18b";
 static const char col_yellow[]           = "#d7ba7d";
@@ -51,7 +51,7 @@ static const char *colors[][3] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* staticstatus */
-static const int statmonval = 1;
+static const int statmonval = 0;
 
 /* tagging */
 static const char *tags[] = { " 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 " };
@@ -117,10 +117,10 @@ static Key keys[] = {
 	{ MODKEY,                       XK_k,           focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,           incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_d,           incnmaster,     {.i = -1 } },
-	{ MODKEY_ALT,                   XK_h,           setmfact,       {.f = -0.05} },
-	{ MODKEY_ALT,                   XK_l,           setmfact,       {.f = +0.05} },
-	{ MODKEY_ALT,                   XK_j,           setmfact,       {.f = -0.05} },
-	{ MODKEY_ALT,                   XK_k,           setmfact,       {.f = +0.05} },
+	// { MODKEY_ALT,                   XK_h,           setmfact,       {.f = -0.05} },
+	// { MODKEY_ALT,                   XK_l,           setmfact,       {.f = +0.05} },
+	// { MODKEY_ALT,                   XK_j,           setmfact,       {.f = -0.05} },
+	// { MODKEY_ALT,                   XK_k,           setmfact,       {.f = +0.05} },
 	{ MODKEY|ShiftMask,             XK_Return,      zoom,           {0} },
 	{ MODKEY,                       XK_q,           killclient,     {0} },
 	{ MODKEY,			                  XK_s,           spawn,		      SHCMD("restream -p") },
@@ -151,7 +151,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_comma,       tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period,      tagmon,         {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_q,           quit,           {0} },
-	{ MODKEY,                       XK_F2,          spawn,          SHCMD("screenkey -s small --scr 2 -p fixed -g 400x100+2150+1330 --opacity .6 --font-color white") },
+	{ MODKEY,                       XK_F2,          spawn,          SHCMD("screenkey -s small --scr 2 -p fixed -g 400x100+4700+25 --opacity .6 --font-color white") },
 	{ MODKEY,                       XK_F3,          spawn,          SHCMD("killall screenkey") },
 	TAGKEYS(                        XK_1,                           0)
 	TAGKEYS(                        XK_2,                           1)
@@ -189,7 +189,6 @@ static Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
