@@ -1,0 +1,41 @@
+--- dwm.c
++++ dwm.c
+@@ -112,27 +113,6 @@ typedef struct {
+ 	void (*arrange)(Monitor *);
+ } Layout;
+ 
+-struct Monitor {
+-	char ltsymbol[16];
+-	float mfact;
+-	int nmaster;
+-	int num;
+-	int by;               /* bar geometry */
+-	int mx, my, mw, mh;   /* screen size */
+-	int wx, wy, ww, wh;   /* window area  */
+-	unsigned int seltags;
+-	unsigned int sellt;
+-	unsigned int tagset[2];
+-	int showbar;
+-	int topbar;
+-	Client *clients;
+-	Client *sel;
+-	Client *stack;
+-	Monitor *next;
+-	Window barwin;
+-	const Layout *lt[2];
+-};
+-
+ typedef struct {
+ 	const char *class;
+ 	const char *instance;
+@@ -205,8 +185,10 @@ static void setmfact(const Arg *arg);
+ static void setup(void);
+ static void seturgent(Client *c, int urg);
+ static void showhide(Client *c);
++static void showtagpreview(int tag);
+ static void sigchld(int unused);
+ static void spawn(const Arg *arg);
++static void switchtag(void);
+ static void tag(const Arg *arg);
+ static void tagmon(const Arg *arg);
+ static void tile(Monitor *);
